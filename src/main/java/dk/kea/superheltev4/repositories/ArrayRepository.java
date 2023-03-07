@@ -4,20 +4,22 @@ import dk.kea.superheltev4.dto.HeroCityDTO;
 import dk.kea.superheltev4.dto.HeroDTO;
 import dk.kea.superheltev4.dto.SuperpowerDTO;
 import dk.kea.superheltev4.models.Superhero;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Repository
 public class ArrayRepository implements IRepository {
     private HeroDTO superhero1 = new HeroDTO("Superman", "Clark Kent", LocalDate.now());
     private HeroDTO superhero2 = new HeroDTO("Batman", "Bruce Wayne", LocalDate.now());
     private HeroDTO superhero3 = new HeroDTO("Spider-Man", "Peter Parker", LocalDate.now());
 
-    private SuperpowerDTO superhero4 = new SuperpowerDTO("Superman", "Clark Kent", 3);
-    private SuperpowerDTO superhero5 = new SuperpowerDTO("Batman", "Bruce Wayne", 3);
-    private SuperpowerDTO superhero6 = new SuperpowerDTO("Spider-Man", "Peter Parker", 3);
+    private SuperpowerDTO superhero4 = new SuperpowerDTO("Superman", "Clark Kent", "Flyve, Stærk");
+    private SuperpowerDTO superhero5 = new SuperpowerDTO("Batman", "Bruce Wayne", "Rig");
+    private SuperpowerDTO superhero6 = new SuperpowerDTO("Spider-Man", "Peter Parker", "Spinne, spidersense");
 
     private HeroCityDTO superhero7 = new HeroCityDTO("Batman", "Arkham");
     private HeroCityDTO superhero8 = new HeroCityDTO("Batman", "Arkham");
@@ -68,7 +70,7 @@ public class ArrayRepository implements IRepository {
     public List<SuperpowerDTO> getSuperpowersCount() {
         List<SuperpowerDTO> superpowerDTOs = new ArrayList<>();
         for (SuperpowerDTO superpower : superpowers) {
-            superpowerDTOs.add(new SuperpowerDTO(superpower.getHeroName(), superpower.getRealName(), superpower.getNumberOfSuperpowers()));
+            superpowerDTOs.add(new SuperpowerDTO(superpower.getHeroName(), superpower.getRealName(), superpower.getSuperpowers()));
         }
         return superpowerDTOs;
     }
@@ -91,15 +93,15 @@ public class ArrayRepository implements IRepository {
 
     @Override
     public List<HeroCityDTO> getHeroesAndCityByHeroName(String heroName) {
-        List<HeroCityDTO> result = new ArrayList<>();
+        List<HeroCityDTO> searchResult = new ArrayList<>();
 
         // find heroes with specified name
         for (HeroCityDTO hero : heroCities) {
             if (hero.getHeroName().equals(heroName)) {
-                result.add(new HeroCityDTO(hero.getHeroName(), hero.getCityName()));
+                searchResult.add(new HeroCityDTO(hero.getHeroName(), hero.getCityName()));
             }
         }
 
-        return result;
+        return searchResult;
     }
 }

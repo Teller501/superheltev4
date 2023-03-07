@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface IRepository {
     List<HeroDTO> getHeroesByHeroName(String heroName);
     List<HeroDTO> getAllHeroes();

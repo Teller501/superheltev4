@@ -3,12 +3,13 @@ package dk.kea.superheltev4.dto;
 public class SuperpowerDTO {
     private String heroName;
     private String realName;
+    private String superpowers;
     private int numberOfSuperpowers;
 
-    public SuperpowerDTO(String heroName, String realName, int numberOfSuperpowers) {
+    public SuperpowerDTO(String heroName, String realName, String superpowers) {
         this.heroName = heroName;
         this.realName = realName;
-        this.numberOfSuperpowers = numberOfSuperpowers;
+        this.superpowers = superpowers;
     }
 
     public String getHeroName() {
@@ -28,10 +29,20 @@ public class SuperpowerDTO {
     }
 
     public int getNumberOfSuperpowers() {
+        String[] superpowersArray = superpowers.split(",");
+        numberOfSuperpowers = superpowersArray.length;
         return numberOfSuperpowers;
     }
 
     public void setNumberOfSuperpowers(int numberOfSuperpowers) {
         this.numberOfSuperpowers = numberOfSuperpowers;
+    }
+
+    public String getSuperpowers() {
+        return superpowers;
+    }
+
+    public void setSuperpowers(String superpowers) {
+        this.superpowers = superpowers;
     }
 }
