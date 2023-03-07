@@ -25,6 +25,12 @@ public class SuperheroController {
         this.repository = repository;
     }
 
+    @GetMapping("")
+    public ResponseEntity<List<HeroDTO>> getAllHeroes(){
+        List<HeroDTO> allHeroes = repository.getAllHeroes();
+        return new ResponseEntity<>(allHeroes, HttpStatus.OK);
+    }
+
     @GetMapping("/{name}")
     public ResponseEntity<List<HeroDTO>> getHeroesByHeroName(@PathVariable String name){
         List<HeroDTO> searchResults = repository.getHeroesByHeroName(name);
@@ -37,15 +43,33 @@ public class SuperheroController {
         return new ResponseEntity<>(superpowers, HttpStatus.OK);
     }
 
+    @GetMapping("/superpower/count")
+    public ResponseEntity<List<SuperpowerDTO>> getSuperpowersCountByHeroName() {
+        List<SuperpowerDTO> superpowers = repository.getSuperpowersCount();
+        return new ResponseEntity<>(superpowers, HttpStatus.OK);
+    }
+
     @GetMapping("/superpower/{name}")
     public ResponseEntity<List<SuperpowerDTO>> getSuperpowersByHeroName(@PathVariable String name) {
         List<SuperpowerDTO> superpowers = repository.getSuperpowersByHeroName(name);
         return new ResponseEntity<>(superpowers, HttpStatus.OK);
     }
 
+    @GetMapping("/superpower")
+    public ResponseEntity<List<SuperpowerDTO>> getSuperpowersByHeroName() {
+        List<SuperpowerDTO> superpowers = repository.getAllSuperpowers();
+        return new ResponseEntity<>(superpowers, HttpStatus.OK);
+    }
+
     @GetMapping("/city/{name}")
     public ResponseEntity<List<HeroCityDTO>> getCityByHeroName(@PathVariable String name) {
         List<HeroCityDTO> heroesAndCities = repository.getHeroesAndCityByHeroName(name);
-        return new ResponseEntity<List<HeroCityDTO>>(heroesAndCities, HttpStatus.OK);
+        return new ResponseEntity<>(heroesAndCities, HttpStatus.OK);
+    }
+
+    @GetMapping("/city")
+    public ResponseEntity<List<HeroCityDTO>> getCityByHeroName() {
+        List<HeroCityDTO> heroesAndCities = repository.getHeroesAndCity();
+        return new ResponseEntity<>(heroesAndCities, HttpStatus.OK);
     }
 }

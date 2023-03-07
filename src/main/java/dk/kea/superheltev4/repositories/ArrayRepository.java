@@ -13,9 +13,9 @@ import java.util.List;
 
 @Repository
 public class ArrayRepository implements IRepository {
-    private HeroDTO superhero1 = new HeroDTO("Superman", "Clark Kent", LocalDate.now());
-    private HeroDTO superhero2 = new HeroDTO("Batman", "Bruce Wayne", LocalDate.now());
-    private HeroDTO superhero3 = new HeroDTO("Spider-Man", "Peter Parker", LocalDate.now());
+    private HeroDTO superhero1 = new HeroDTO(0,"Superman", "Clark Kent", LocalDate.now());
+    private HeroDTO superhero2 = new HeroDTO(0,"Batman", "Bruce Wayne", LocalDate.now());
+    private HeroDTO superhero3 = new HeroDTO(0,"Spider-Man", "Peter Parker", LocalDate.now());
 
     private SuperpowerDTO superhero4 = new SuperpowerDTO("Superman", "Clark Kent", "Flyve, Stærk");
     private SuperpowerDTO superhero5 = new SuperpowerDTO("Batman", "Bruce Wayne", "Rig");
@@ -39,7 +39,7 @@ public class ArrayRepository implements IRepository {
         for (HeroDTO superhero : superheroes) {
             String name = superhero.getHeroName().toLowerCase();
             if (name.contains(heroName.toLowerCase().trim())) {
-                searchResults.add(new HeroDTO(superhero.getHeroName(), superhero.getRealName(), superhero.getCreationDate()));
+                searchResults.add(new HeroDTO(superhero.getId(),superhero.getHeroName(), superhero.getRealName(), superhero.getCreationDate()));
             }
         }
         // return searchResult
@@ -50,7 +50,7 @@ public class ArrayRepository implements IRepository {
     public List<HeroDTO> getAllHeroes() {
         List<HeroDTO> heroDTOs = new ArrayList<>();
         for (HeroDTO superhero : superheroes) {
-            heroDTOs.add(new HeroDTO(superhero.getHeroName(), superhero.getRealName(), superhero.getCreationDate()));
+            heroDTOs.add(new HeroDTO(superhero.getId(),superhero.getHeroName(), superhero.getRealName(), superhero.getCreationDate()));
         }
         return heroDTOs;
     }
@@ -103,5 +103,10 @@ public class ArrayRepository implements IRepository {
         }
 
         return searchResult;
+    }
+
+    @Override
+    public List<HeroCityDTO> getHeroesAndCity() {
+        return null;
     }
 }
