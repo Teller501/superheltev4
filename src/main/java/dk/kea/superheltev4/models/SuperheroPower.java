@@ -2,8 +2,8 @@ package dk.kea.superheltev4.models;
 
 public class SuperheroPower {
     private int id;
-    private int heroID;
-    private int superpowerID;
+    private Superhero superhero;
+    private Superpower superpower;
 
     public int getId() {
         return id;
@@ -13,19 +13,28 @@ public class SuperheroPower {
         this.id = id;
     }
 
-    public int getHeroID() {
-        return heroID;
+    public Superhero getSuperhero() {
+        return superhero;
     }
 
-    public void setHeroID(int heroID) {
-        this.heroID = heroID;
+    public void setSuperhero(Superhero superhero) {
+        this.superhero = superhero;
     }
 
-    public int getSuperpowerID() {
-        return superpowerID;
+    public Superpower getSuperpower() {
+        return superpower;
     }
 
-    public void setSuperpowerID(int superpowerID) {
-        this.superpowerID = superpowerID;
+    public void setSuperpower(Superpower superpower) {
+        this.superpower = superpower;
+    }
+
+    @Override
+    public String toString() {
+        return "SuperheroPower{" +
+                "id=" + id +
+                ", superhero=" + superhero +
+                ", superpower=" + superpower +
+                '}';
     }
 }

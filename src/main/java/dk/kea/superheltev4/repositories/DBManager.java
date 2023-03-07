@@ -1,4 +1,4 @@
-package dk.kea.superheltev4;
+package dk.kea.superheltev4.repositories;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

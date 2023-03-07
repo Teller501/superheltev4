@@ -1,6 +1,7 @@
 package dk.kea.superheltev4.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Superhero {
     private int id;
@@ -8,11 +9,18 @@ public class Superhero {
     private String realName;
     private LocalDate creationDate;
     private boolean isHuman;
-    private int cityID;
-    private String superpowers;
+    private City city;
+    private List<Superpower> superpowers;
     private double power;
 
 
+    public Superhero(String heroName, String realName, LocalDate creationDate, boolean isHuman, double power) {
+        this.heroName = heroName;
+        this.realName = realName;
+        this.creationDate = creationDate;
+        this.isHuman = isHuman;
+        this.power = power;
+    }
 
     public int getId() {
         return id;
@@ -34,11 +42,12 @@ public class Superhero {
         return isHuman;
     }
 
-    public int getCityID() {
-        return cityID;
+
+    public City getCity() {
+        return city;
     }
 
-    public String getSuperpowers() {
+    public List<Superpower> getSuperpowers() {
         return superpowers;
     }
 
@@ -66,15 +75,29 @@ public class Superhero {
         isHuman = human;
     }
 
-    public void setCityID(int cityID) {
-        this.cityID = cityID;
+    public void setCity(City city) {
+        this.city = city;
     }
 
-    public void setSuperpowers(String superpowers) {
+    public void setSuperpowers(List<Superpower> superpowers) {
         this.superpowers = superpowers;
     }
 
     public void setPower(double power) {
         this.power = power;
+    }
+
+    @Override
+    public String toString() {
+        return "Superhero{" +
+                "id=" + id +
+                ", heroName='" + heroName + '\'' +
+                ", realName='" + realName + '\'' +
+                ", creationDate=" + creationDate +
+                ", isHuman=" + isHuman +
+                ", city=" + city +
+                ", superpowers=" + superpowers +
+                ", power=" + power +
+                '}';
     }
 }
