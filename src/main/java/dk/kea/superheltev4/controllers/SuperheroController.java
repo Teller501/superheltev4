@@ -5,12 +5,14 @@ import dk.kea.superheltev4.dto.HeroDTO;
 import dk.kea.superheltev4.dto.SuperpowerDTO;
 import dk.kea.superheltev4.repositories.IRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -26,9 +28,26 @@ public class SuperheroController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<HeroDTO>> getAllHeroes(){
-        List<HeroDTO> allHeroes = repository.getAllHeroes();
-        return new ResponseEntity<>(allHeroes, HttpStatus.OK);
+    public ResponseEntity<?> getAllHeroes(@RequestParam(required = false) String format){
+        List<HeroDTO> getAllHeroes = repository.getAllHeroes();
+
+        if (format != null && format.equals("html")){
+            StringBuilder htmlFormat = new StringBuilder();
+            htmlFormat.append("<table>");
+            htmlFormat.append("<tr><th>Superhero Name</th><th>Real Name</th><th>Creation Year</th></tr>");
+            for (HeroDTO hero : getAllHeroes){
+                htmlFormat.append("<tr><td>").append(hero.getHeroName()).append("</td>");
+                htmlFormat.append("<td>").append(hero.getRealName()).append("</td>");
+                htmlFormat.append("<td>").append(hero.getCreationDate()).append("</td></tr>");
+            }
+            htmlFormat.append("</table>");
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("content-type", "text/html");
+            return new ResponseEntity<>(htmlFormat.toString(), headers, HttpStatus.OK);
+        } else{
+            return new ResponseEntity<>(getAllHeroes, HttpStatus.OK);
+        }
     }
 
     @GetMapping("/{name}")
