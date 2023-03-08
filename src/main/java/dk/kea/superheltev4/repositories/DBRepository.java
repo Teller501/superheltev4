@@ -147,12 +147,11 @@ public class DBRepository implements IRepository{
     @Override
     public List<HeroCityDTO> getHeroesAndCity() {
         try (Connection conn = DBManager.getConnection()) {
-            String sql = "SELECT id, heroname, city.name FROM superhero JOIN city ON superhero.id = city.cityid";
+            String sql = "SELECT city.name, heroname FROM superhero JOIN city ON superhero.id = city.cityid";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
                 String name = rs.getString("heroname");
                 String cityName = rs.getString("name");
                 HeroCityDTO hero = new HeroCityDTO(name,cityName);

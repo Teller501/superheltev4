@@ -13,6 +13,7 @@ import java.util.List;
 
 @Repository("superhero_Array")
 public class ArrayRepository implements IRepository {
+    // Test Data
     private HeroDTO superhero1 = new HeroDTO(0,"Superman", "Clark Kent", LocalDate.now());
     private HeroDTO superhero2 = new HeroDTO(0,"Batman", "Bruce Wayne", LocalDate.now());
     private HeroDTO superhero3 = new HeroDTO(0,"Spider-Man", "Peter Parker", LocalDate.now());
