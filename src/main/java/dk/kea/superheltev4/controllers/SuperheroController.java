@@ -4,7 +4,8 @@ import dk.kea.superheltev4.dto.HeroCityDTO;
 import dk.kea.superheltev4.dto.HeroDTO;
 import dk.kea.superheltev4.dto.SuperpowerDTO;
 import dk.kea.superheltev4.repositories.IRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +21,10 @@ import java.util.List;
 @RequestMapping("superhero")
 public class SuperheroController {
 
-    private IRepository repository;
+    IRepository repository;
 
-    @Autowired
-    public SuperheroController(IRepository repository){
-        this.repository = repository;
+    public SuperheroController(ApplicationContext context, @Value("${superhero.repository.impl}") String impl){
+        repository = (IRepository) context.getBean(impl);
     }
 
     @GetMapping("")

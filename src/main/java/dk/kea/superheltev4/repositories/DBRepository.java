@@ -14,8 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Primary
-@Repository
+@Repository("superhero_DB")
 public class DBRepository implements IRepository{
     List<HeroDTO> heroes = new ArrayList<>();
     List<SuperpowerDTO> heroSuperpowers = new ArrayList<>();

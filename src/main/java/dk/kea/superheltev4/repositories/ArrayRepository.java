@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Repository
+@Repository("superhero_Array")
 public class ArrayRepository implements IRepository {
     private HeroDTO superhero1 = new HeroDTO(0,"Superman", "Clark Kent", LocalDate.now());
     private HeroDTO superhero2 = new HeroDTO(0,"Batman", "Bruce Wayne", LocalDate.now());
