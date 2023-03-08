@@ -76,22 +76,6 @@ public class ArrayRepository implements IRepository {
     }
 
     @Override
-    public List<SuperpowerDTO> getSuperpowersByHeroName(String heroName) {
-        List<SuperpowerDTO> searchResults = new ArrayList<>();
-        for (SuperpowerDTO superpower : superpowers) {
-            if (superpower.getHeroName().equals(heroName)) {
-                searchResults.add(superpower);
-            }
-        }
-        return searchResults;
-    }
-
-    @Override
-    public List<SuperpowerDTO> getAllSuperpowers() {
-        return superpowers;
-    }
-
-    @Override
     public List<HeroCityDTO> getHeroesAndCityByHeroName(String heroName) {
         List<HeroCityDTO> searchResult = new ArrayList<>();
 
@@ -107,6 +91,11 @@ public class ArrayRepository implements IRepository {
 
     @Override
     public List<HeroCityDTO> getHeroesAndCity() {
-        return null;
+        List<HeroCityDTO> heroCityDTOS = new ArrayList<>();
+        for (HeroCityDTO heroCity : heroCityDTOS) {
+            heroCityDTOS.add(new HeroCityDTO(heroCity.getHeroName(), heroCity.getCityName()));
+        }
+        return heroCityDTOS;
+
     }
 }

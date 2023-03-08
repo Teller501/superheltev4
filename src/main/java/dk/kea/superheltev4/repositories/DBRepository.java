@@ -116,53 +116,6 @@ public class DBRepository implements IRepository{
     }
 
     @Override
-    public List<SuperpowerDTO> getSuperpowersByHeroName(String heroName) {
-        try (Connection conn = DBManager.getConnection()) {
-            String sql = "SELECT id, heroname, realname, superpowers FROM superhero WHERE heroname = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, heroName);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("heroname");
-                String realName = rs.getString("realname");
-                String superpowers = rs.getString("superpowers");
-                SuperpowerDTO hero = new SuperpowerDTO(name,realName,superpowers);
-                heroSuperpowers.add(hero);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return heroSuperpowers;
-    }
-
-    @Override
-    public List<SuperpowerDTO> getAllSuperpowers() {
-        try (Connection conn = DBManager.getConnection()) {
-            String sql = "SELECT id, heroname, realname, superpowers FROM superhero";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("heroname");
-                String realName = rs.getString("realname");
-                String superpowers = rs.getString("superpowers");
-                SuperpowerDTO hero = new SuperpowerDTO(name,realName,superpowers);
-                heroSuperpowers.add(hero);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return heroSuperpowers;
-    }
-
-    @Override
     public List<HeroCityDTO> getHeroesAndCityByHeroName(String heroName) {
         try (Connection conn = DBManager.getConnection()) {
             String sql = "SELECT id, heroname, city.name FROM superhero JOIN city ON superhero.id = city.cityid WHERE heroname = ?";
