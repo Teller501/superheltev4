@@ -28,16 +28,6 @@ public class SuperpowerDTO {
         this.realName = realName;
     }
 
-    public int getNumberOfSuperpowers() {
-        String[] superpowersArray = superpowers.split(",");
-        numberOfSuperpowers = superpowersArray.length;
-        return numberOfSuperpowers;
-    }
-
-    public void setNumberOfSuperpowers(int numberOfSuperpowers) {
-        this.numberOfSuperpowers = numberOfSuperpowers;
-    }
-
     public String getSuperpowers() {
         return superpowers;
     }

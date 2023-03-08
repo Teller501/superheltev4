@@ -74,13 +74,16 @@ public class DBRepository implements IRepository{
     @Override
     public List<SuperpowerDTO> getSuperpowersByHeroName(String heroName) {
         try (Connection conn = DBManager.getConnection()) {
-            String sql = "SELECT id, heroname, realname, superpowers FROM superhero WHERE heroname = ?";
+            String sql = "SELECT superhero.heroname, superhero.realname, GROUP_CONCAT(superpower.name SEPARATOR ', ') AS superpowers " +
+                    "FROM superhero " +
+                    "JOIN superheropower ON superhero.id = superheropower.heroid " +
+                    "JOIN superpower ON superheropower.superpowerid = superpower.id WHERE superhero.heroname = ?" +
+                    "GROUP BY superhero.heroname, superhero.realname ";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, heroName);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
                 String name = rs.getString("heroname");
                 String realName = rs.getString("realname");
                 String superpowers = rs.getString("superpowers");
@@ -99,12 +102,15 @@ public class DBRepository implements IRepository{
     @Override
     public List<SuperpowerDTO> getSuperpowers() {
         try (Connection conn = DBManager.getConnection()) {
-            String sql = "SELECT id, heroname, realname, superpowers FROM superhero";
+            String sql = "SELECT superhero.heroname, superhero.realname, GROUP_CONCAT(superpower.name SEPARATOR ', ') AS superpowers " +
+                    "FROM superhero " +
+                    "JOIN superheropower ON superhero.id = superheropower.heroid " +
+                    "JOIN superpower ON superheropower.superpowerid = superpower.id " +
+                    "GROUP BY superhero.heroname, superhero.realname ";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
                 String name = rs.getString("heroname");
                 String realName = rs.getString("realname");
                 String superpowers = rs.getString("superpowers");
