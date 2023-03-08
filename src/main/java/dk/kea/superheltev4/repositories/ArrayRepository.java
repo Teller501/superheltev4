@@ -56,7 +56,7 @@ public class ArrayRepository implements IRepository {
     }
 
     @Override
-    public List<SuperpowerDTO> getSuperpowersCountByHeroName(String heroName) {
+    public List<SuperpowerDTO> getSuperpowersByHeroName(String heroName) {
         List<SuperpowerDTO> searchResults = new ArrayList<>();
         for (SuperpowerDTO superpower : superpowers) {
             if (superpower.getHeroName().equals(heroName)) {
@@ -67,7 +67,7 @@ public class ArrayRepository implements IRepository {
     }
 
     @Override
-    public List<SuperpowerDTO> getSuperpowersCount() {
+    public List<SuperpowerDTO> getSuperpowers() {
         List<SuperpowerDTO> superpowerDTOs = new ArrayList<>();
         for (SuperpowerDTO superpower : superpowers) {
             superpowerDTOs.add(new SuperpowerDTO(superpower.getHeroName(), superpower.getRealName(), superpower.getSuperpowers()));

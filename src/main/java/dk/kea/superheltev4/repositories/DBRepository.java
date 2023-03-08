@@ -20,6 +20,8 @@ public class DBRepository implements IRepository{
     List<HeroDTO> heroes = new ArrayList<>();
     List<SuperpowerDTO> heroSuperpowers = new ArrayList<>();
     List<HeroCityDTO> heroCityList = new ArrayList<>();
+
+    // Getting superheroes by name search
     @Override
     public List<HeroDTO> getHeroesByHeroName(String heroName) {
 
@@ -45,6 +47,7 @@ public class DBRepository implements IRepository{
         return heroes;
     }
 
+    // Getting all heroes from superhero table
     @Override
     public List<HeroDTO> getAllHeroes() {
         try (Connection conn = DBManager.getConnection()) {
@@ -68,8 +71,9 @@ public class DBRepository implements IRepository{
         return heroes;
     }
 
+    // Getting superpowers and hero from heroname search
     @Override
-    public List<SuperpowerDTO> getSuperpowersCountByHeroName(String heroName) {
+    public List<SuperpowerDTO> getSuperpowersByHeroName(String heroName) {
         try (Connection conn = DBManager.getConnection()) {
             String sql = "SELECT id, heroname, realname, superpowers FROM superhero WHERE heroname = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -92,8 +96,9 @@ public class DBRepository implements IRepository{
         return heroSuperpowers;
     }
 
+    // Getting all superheroes and their powers
     @Override
-    public List<SuperpowerDTO> getSuperpowersCount() {
+    public List<SuperpowerDTO> getSuperpowers() {
         try (Connection conn = DBManager.getConnection()) {
             String sql = "SELECT id, heroname, realname, superpowers FROM superhero";
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -115,6 +120,7 @@ public class DBRepository implements IRepository{
         return heroSuperpowers;
     }
 
+    // Getting the heroes and their respective city by heroname
     @Override
     public List<HeroCityDTO> getHeroesAndCityByHeroName(String heroName) {
         try (Connection conn = DBManager.getConnection()) {
@@ -138,6 +144,7 @@ public class DBRepository implements IRepository{
         return heroCityList;
     }
 
+    // Getting all the heroes and their respective cities
     @Override
     public List<HeroCityDTO> getHeroesAndCity() {
         try (Connection conn = DBManager.getConnection()) {

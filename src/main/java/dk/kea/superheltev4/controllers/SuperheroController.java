@@ -39,13 +39,13 @@ public class SuperheroController {
 
     @GetMapping("/superpower/count/{name}")
     public ResponseEntity<List<SuperpowerDTO>> getSuperpowersCountByHeroName(@PathVariable String name) {
-        List<SuperpowerDTO> superpowers = repository.getSuperpowersCountByHeroName(name);
+        List<SuperpowerDTO> superpowers = repository.getSuperpowersByHeroName(name);
         return new ResponseEntity<>(superpowers, HttpStatus.OK);
     }
 
     @GetMapping("/superpower/count")
     public ResponseEntity<List<SuperpowerDTO>> getSuperpowersCountByHeroName() {
-        List<SuperpowerDTO> superpowers = repository.getSuperpowersCount();
+        List<SuperpowerDTO> superpowers = repository.getSuperpowers();
         return new ResponseEntity<>(superpowers, HttpStatus.OK);
     }
 
@@ -57,7 +57,7 @@ public class SuperheroController {
 
     @GetMapping("/superpower")
     public ResponseEntity<List<SuperpowerDTO>> getSuperpowersByHeroName() {
-        List<SuperpowerDTO> superpowers = repository.getAllSuperpowers();
+        List<SuperpowerDTO> superpowers = repository.getSuperpowers();
         return new ResponseEntity<>(superpowers, HttpStatus.OK);
     }
 
