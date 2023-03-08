@@ -2,6 +2,7 @@ package dk.kea.superheltev4.controllers;
 
 import dk.kea.superheltev4.dto.HeroCityDTO;
 import dk.kea.superheltev4.dto.HeroDTO;
+import dk.kea.superheltev4.dto.SuperpowerCountDTO;
 import dk.kea.superheltev4.dto.SuperpowerDTO;
 import dk.kea.superheltev4.repositories.IRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,14 +58,14 @@ public class SuperheroController {
     }
 
     @GetMapping("/superpower/count/{name}")
-    public ResponseEntity<List<SuperpowerDTO>> getSuperpowersCountByHeroName(@PathVariable String name) {
-        List<SuperpowerDTO> superpowers = repository.getSuperpowersByHeroName(name);
+    public ResponseEntity<List<SuperpowerCountDTO>> getSuperpowersCountByHeroName(@PathVariable String name) {
+        List<SuperpowerCountDTO> superpowers = repository.getSuperpowersCountByHeroName(name);
         return new ResponseEntity<>(superpowers, HttpStatus.OK);
     }
 
     @GetMapping("/superpower/count")
-    public ResponseEntity<List<SuperpowerDTO>> getSuperpowersCountByHeroName() {
-        List<SuperpowerDTO> superpowers = repository.getSuperpowers();
+    public ResponseEntity<List<SuperpowerCountDTO>> getSuperpowersCountByHeroName() {
+        List<SuperpowerCountDTO> superpowers = repository.getSuperpowersCount();
         return new ResponseEntity<>(superpowers, HttpStatus.OK);
     }
 

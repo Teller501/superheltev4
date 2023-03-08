@@ -2,6 +2,7 @@ package dk.kea.superheltev4.repositories;
 
 import dk.kea.superheltev4.dto.HeroCityDTO;
 import dk.kea.superheltev4.dto.HeroDTO;
+import dk.kea.superheltev4.dto.SuperpowerCountDTO;
 import dk.kea.superheltev4.dto.SuperpowerDTO;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,7 @@ public class DBRepository implements IRepository{
     List<HeroDTO> heroes = new ArrayList<>();
     List<SuperpowerDTO> heroSuperpowers = new ArrayList<>();
     List<HeroCityDTO> heroCityList = new ArrayList<>();
+    List<SuperpowerCountDTO> superpowerCountList = new ArrayList<>();
 
     // Getting superheroes by name search
     @Override
@@ -123,6 +125,55 @@ public class DBRepository implements IRepository{
         }
 
         return heroSuperpowers;
+    }
+
+    @Override
+    public List<SuperpowerCountDTO> getSuperpowersCountByHeroName(String heroName) {
+        try (Connection conn = DBManager.getConnection()) {
+            String sql = "SELECT superhero.heroname, COUNT(superheropower.superpowerid) AS superpowersCount " +
+                    "FROM superhero " +
+                    "JOIN superheropower ON superhero.id = superheropower.heroid WHERE superhero.heroname = ?" +
+                    "GROUP BY superhero.heroname";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1,heroName);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("heroname");
+                int superpowersCount = rs.getInt("superpowersCount");
+                SuperpowerCountDTO hero = new SuperpowerCountDTO(name,superpowersCount);
+                superpowerCountList.add(hero);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return superpowerCountList;
+    }
+
+    @Override
+    public List<SuperpowerCountDTO> getSuperpowersCount() {
+        try (Connection conn = DBManager.getConnection()) {
+            String sql = "SELECT superhero.heroname, COUNT(superheropower.superpowerid) AS superpowersCount " +
+                    "FROM superhero " +
+                    "JOIN superheropower ON superhero.id = superheropower.heroid " +
+                    "GROUP BY superhero.heroname";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("heroname");
+                int superpowersCount = rs.getInt("superpowersCount");
+                SuperpowerCountDTO hero = new SuperpowerCountDTO(name,superpowersCount);
+                superpowerCountList.add(hero);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return superpowerCountList;
     }
 
     // Getting the heroes and their respective city by heroname

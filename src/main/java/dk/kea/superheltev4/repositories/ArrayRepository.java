@@ -2,6 +2,7 @@ package dk.kea.superheltev4.repositories;
 
 import dk.kea.superheltev4.dto.HeroCityDTO;
 import dk.kea.superheltev4.dto.HeroDTO;
+import dk.kea.superheltev4.dto.SuperpowerCountDTO;
 import dk.kea.superheltev4.dto.SuperpowerDTO;
 import dk.kea.superheltev4.models.Superhero;
 import org.springframework.stereotype.Repository;
@@ -74,6 +75,16 @@ public class ArrayRepository implements IRepository {
             superpowerDTOs.add(new SuperpowerDTO(superpower.getHeroName(), superpower.getRealName(), superpower.getSuperpowers()));
         }
         return superpowerDTOs;
+    }
+
+    @Override
+    public List<SuperpowerCountDTO> getSuperpowersCountByHeroName(String heroName) {
+        return null;
+    }
+
+    @Override
+    public List<SuperpowerCountDTO> getSuperpowersCount() {
+        return null;
     }
 
     @Override
