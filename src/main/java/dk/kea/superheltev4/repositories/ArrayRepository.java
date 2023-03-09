@@ -4,7 +4,6 @@ import dk.kea.superheltev4.dto.HeroCityDTO;
 import dk.kea.superheltev4.dto.HeroDTO;
 import dk.kea.superheltev4.dto.SuperpowerCountDTO;
 import dk.kea.superheltev4.dto.SuperpowerDTO;
-import dk.kea.superheltev4.models.Superhero;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -93,8 +92,8 @@ public class ArrayRepository implements IRepository {
 
         // find heroes with specified name
         for (HeroCityDTO hero : heroCities) {
-            if (hero.getHeroName().equals(heroName)) {
-                searchResult.add(new HeroCityDTO(hero.getHeroName(), hero.getCityName()));
+            if (hero.getHeroes().equals(heroName)) {
+                searchResult.add(new HeroCityDTO(hero.getHeroes(), hero.getCityName()));
             }
         }
 
@@ -105,7 +104,7 @@ public class ArrayRepository implements IRepository {
     public List<HeroCityDTO> getHeroesAndCity() {
         List<HeroCityDTO> heroCityDTOS = new ArrayList<>();
         for (HeroCityDTO heroCity : heroCityDTOS) {
-            heroCityDTOS.add(new HeroCityDTO(heroCity.getHeroName(), heroCity.getCityName()));
+            heroCityDTOS.add(new HeroCityDTO(heroCity.getHeroes(), heroCity.getCityName()));
         }
         return heroCityDTOS;
 

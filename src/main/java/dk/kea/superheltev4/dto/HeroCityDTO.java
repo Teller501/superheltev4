@@ -1,20 +1,20 @@
 package dk.kea.superheltev4.dto;
 
 public class HeroCityDTO {
-    private String heroName;
+    private String heroes;
     private String cityName;
 
-    public HeroCityDTO(String heroName, String cityName) {
-        this.heroName = heroName;
+    public HeroCityDTO(String heroes, String cityName) {
+        this.heroes = heroes;
         this.cityName = cityName;
     }
 
-    public String getHeroName() {
-        return heroName;
+    public String getHeroes() {
+        return heroes;
     }
 
-    public void setHeroName(String heroName) {
-        this.heroName = heroName;
+    public void setHeroes(String heroes) {
+        this.heroes = heroes;
     }
 
     public String getCityName() {

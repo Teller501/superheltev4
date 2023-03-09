@@ -178,18 +178,21 @@ public class DBRepository implements IRepository{
 
     // Getting the heroes and their respective city by heroname
     @Override
-    public List<HeroCityDTO> getHeroesAndCityByHeroName(String heroName) {
+    public List<HeroCityDTO> getHeroesAndCityByHeroName(String cityName) {
         try (Connection conn = DBManager.getConnection()) {
-            String sql = "SELECT id, heroname, city.name FROM superhero JOIN city ON superhero.id = city.cityid WHERE heroname = ?";
+            String sql = "SELECT city.name, GROUP_CONCAT(superhero.heroname SEPARATOR ', ') AS heroes " +
+                    "FROM superhero " +
+                    "JOIN city ON superhero.cityid = city.cityid WHERE city.name = ?" +
+                    "GROUP BY city.name " +
+                    "ORDER BY city.name";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, heroName);
+            stmt.setString(1, cityName);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("heroname");
-                String cityName = rs.getString("name");
-                HeroCityDTO hero = new HeroCityDTO(name,cityName);
+                String name = rs.getString("heroes");
+                String cityNames = rs.getString("name");
+                HeroCityDTO hero = new HeroCityDTO(name,cityNames);
                 heroCityList.add(hero);
             }
 
@@ -204,12 +207,16 @@ public class DBRepository implements IRepository{
     @Override
     public List<HeroCityDTO> getHeroesAndCity() {
         try (Connection conn = DBManager.getConnection()) {
-            String sql = "SELECT city.name, heroname FROM superhero JOIN city ON superhero.id = city.cityid";
+            String sql = "SELECT city.name, GROUP_CONCAT(superhero.heroname SEPARATOR ', ') AS heroes " +
+                    "FROM superhero " +
+                    "JOIN city ON superhero.cityid = city.cityid " +
+                    "GROUP BY city.name " +
+                    "ORDER BY city.name";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                String name = rs.getString("heroname");
+                String name = rs.getString("heroes");
                 String cityName = rs.getString("name");
                 HeroCityDTO hero = new HeroCityDTO(name,cityName);
                 heroCityList.add(hero);

@@ -11,7 +11,7 @@ public interface IRepository {
 
     List<SuperpowerCountDTO> getSuperpowersCountByHeroName(String heroName);
     List<SuperpowerCountDTO> getSuperpowersCount();
-    List<HeroCityDTO> getHeroesAndCityByHeroName(String heroName);
+    List<HeroCityDTO> getHeroesAndCityByHeroName(String cityName);
     List<HeroCityDTO> getHeroesAndCity();
 
 }
