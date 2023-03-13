@@ -14,7 +14,8 @@
 	<name>superheltev4</name>
 	<description>superheltev4</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>17</java.version>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -36,6 +37,8 @@
 
 
 	</dependencies>
+
+
 
 	<build>
 		<plugins>
